@@ -25,13 +25,18 @@ The Express server starts listening for requests on port 3000 and logs a success
 To build a Docker image from the Dockerfile provided, navigate to the directory containing the Dockerfile and execute:
 
 ```bash
-docker build -t web-app .
+docker build -t my-web-app .
 ```
 
 To run the application:
 
 ```bash
-docker run -p 3000:3000 -d web-app
+docker run -p 3000:3000 -d my-web-app
 ```
 
 After running these commands, visit `http://localhost:3000` to see the application in action.
+
+## Example
+
+![Simple Web App](simple-web-app.png)
+
