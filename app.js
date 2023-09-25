@@ -88,18 +88,39 @@ app.get('/', async (req, res) => {
 // App1 page
 app.get('/app1', (req, res) => {
   res.send(`
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: blue; color: white;">
-      <h2>Welcome to App1</h2>
-    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <body style="background-color: lightgray;">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="bg-primary text-white rounded p-3">
+              <h2>Welcome to App1</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
   `);
 });
 
 // App2 page
 app.get('/app2', (req, res) => {
   res.send(`
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: green; color: white;">
-      <h2>Welcome to App2</h2>
-    </div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <body style="background-color: lightgray;">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <div class="bg-success text-white rounded p-3">
+              <h2>Welcome to App2</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+  `);
+});
+
   `);
 });
 
