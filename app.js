@@ -16,7 +16,8 @@ app.get('/', async (req, res) => {
           <h2>Welcome to Fortinet Demo Site</h2> <!-- Title -->
           <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
         </div>
-      </div>
+
+      <div style="height: 20px;"></div>
 
       <table class="table table-striped"> <!-- Added Bootstrap table classes -->
       <tr>
