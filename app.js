@@ -87,13 +87,22 @@ app.get('/', async (req, res) => {
 
 // App1 page
 app.get('/app1', (req, res) => {
-  res.send('<body style="background-color: blue;"><h2>Welcome to App1</h2></body>');
+  res.send(`
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: blue; color: white;">
+      <h2>Welcome to App1</h2>
+    </div>
+  `);
 });
 
 // App2 page
 app.get('/app2', (req, res) => {
-  res.send('<body style="background-color: green;"><h2>Welcome to App2</h2></body>');
+  res.send(`
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: green; color: white;">
+      <h2>Welcome to App2</h2>
+    </div>
+  `);
 });
+
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
