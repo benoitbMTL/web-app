@@ -8,37 +8,65 @@ const hostname = process.env.HOST_MACHINE_NAME || 'Unknown';
 app.get('/', async (req, res) => {
   const { data } = await axios.get('http://ip-api.com/json');
   res.send(`
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <div class="container"> <!-- Bootstrap container to add space on the left and right -->
+      <div class="container"> <!-- Bootstrap container to add space on the left and right -->
       <h2>Welcome to Fortinet Demo Site</h2>
 
       <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
       <div style="height: 20px;"></div>
 
-      <style>
-        /* Override Bootstrap styles */
-        table {
-          width: auto;  /* Set width to auto */
-          margin: auto; /* Center the table */
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-        }
+      <table class="table table-striped"> <!-- Added Bootstrap table classes -->
+      <tr>
+      <th>Attribute</th>
+      <th>Value</th>
+      </tr>
+      <tr>
+      <td>Hostname</td>
+      <td>${hostname}</td>
+      </tr>
+      <tr>
+      <td>IP</td>
+      <td>${data.query}</td>
+      </tr>
+      <tr>
+      <td>Country</td>
+      <td>${data.country}</td>
+      </tr>
+      <tr>
+      <td>Country Code</td>
+      <td>${data.countryCode}</td>
+      </tr>
+      <tr>
+      <td>Region</td>
+      <td>${data.region}</td>
+      </tr>
+      <tr>
+      <td>Region Name</td>
+      <td>${data.regionName}</td>
+      </tr>
+      <tr>
+      <td>City</td>
+      <td>${data.city}</td>
+      </tr>
+      <tr>
+      <td>Zip</td>
+      <td>${data.zip}</td>
+      </tr>
+      <tr>
+      <td>Timezone</td>
+      <td>${data.timezone}</td>
+      </tr>
+      <tr>
+      <td>ISP</td>
+      <td>${data.isp}</td>
+      </tr>
+      <tr>
+      <td>Organization</td>
+      <td>${data.org}</td>
+      </tr>
 
-        td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
-        }
-
-        tr:nth-child(even) {
-          background-color: #dddddd;
-        }
-      </style>
-
-      <table>
-        <!-- Table content here -->
       </table>
 
       <div style="height: 20px;"></div>
@@ -46,12 +74,12 @@ app.get('/', async (req, res) => {
       <!-- Bootstrap Buttons -->
       <a href="/app1" class="btn btn-primary">App1</a>
       <a href="/app2" class="btn btn-success">App2</a>
-    </div> <!-- End of Bootstrap container -->
+      </div> <!-- End of Bootstrap container -->
 
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- Bootstrap JS (optional) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   `);
 });
 
