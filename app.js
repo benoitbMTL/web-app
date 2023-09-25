@@ -26,18 +26,18 @@ app.get('/', async (req, res) => {
     <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
     <div style="height: 20px;"></div> <!-- Added space before the table -->
 
-    <table>
-      <tr><td>Country:</td><td>${data.country}</td></tr>
-      <tr><td>Country Code:</td><td>${data.countryCode}</td></tr>
-      <tr><td>Region:</td><td>${data.region}</td></tr>
-      <tr><td>Region Name:</td><td>${data.regionName}</td></tr>
-      <tr><td>City:</td><td>${data.city}</td></tr>
-      <tr><td>Zip:</td><td>${data.zip}</td></tr>
-      <tr><td>Timezone:</td><td>${data.timezone}</td></tr>
-      <tr><td>ISP:</td><td>${data.isp}</td></tr>
-      <tr><td>Organization:</td><td>${data.org}</td></tr>
-      <tr><td>IP:</td><td>${data.query}</td></tr>
-    </table>
+    <table><tr><td colspan="2">
+      Country:</td><td>${data.country}<br>
+      Country Code:</td><td>${data.countryCode}<br>
+      Region:</td><td>${data.region}<br>
+      Region Name:</td><td>${data.regionName}<br>
+      City:</td><td>${data.city}<br>
+      Zip:</td><td>${data.zip}<br>
+      Timezone:</td><td>${data.timezone}<br>
+      ISP:</td><td>${data.isp}<br>
+      Organization:</td><td>${data.org}<br>
+      IP:</td><td>${data.query}
+      </td></tr></table>
 
     <div style="height: 20px;"></div> <!-- Added space before the table -->
     <a href="/app1"><button style="background-color: blue; color: white;">App1</button></a>
