@@ -9,39 +9,90 @@ app.get('/', async (req, res) => {
   const { data } = await axios.get('http://ip-api.com/json');
   res.send(`
 
-    <style>
-    table {
-      border: 1px solid black;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-      border-collapse: collapse;
-    }
-    td {
-      padding: 2px;
-    }
-    </style>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <h2>Welcome to Fortinet Demo Site</h2>
-    <h3>Hostname: ${hostname}</h3>
 
-    <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
-    <div style="height: 20px;"></div> <!-- Added space before the table -->
+  <style>
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
 
-    <table><tr><td colspan="2">
-      Country:</td><td>${data.country}<br>
-      Country Code:</td><td>${data.countryCode}<br>
-      Region:</td><td>${data.region}<br>
-      Region Name:</td><td>${data.regionName}<br>
-      City:</td><td>${data.city}<br>
-      Zip:</td><td>${data.zip}<br>
-      Timezone:</td><td>${data.timezone}<br>
-      ISP:</td><td>${data.isp}<br>
-      Organization:</td><td>${data.org}<br>
-      IP:</td><td>${data.query}
-      </td></tr></table>
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
 
-    <div style="height: 20px;"></div> <!-- Added space before the table -->
-    <a href="/app1"><button style="background-color: blue; color: white;">App1</button></a>
-    <a href="/app2"><button style="background-color: green; color: white;">App2</button></a>
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+
+  <h2>Welcome to Fortinet Demo Site</h2>
+  #<h3>Hostname: ${hostname}</h3>
+
+  <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
+  <div style="height: 20px;"></div> <!-- Added space before the table -->
+
+<table>
+  <tr>
+    <th>Attribute</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Country</td>
+    <td>${data.country}</td>
+  </tr>
+  <tr>
+    <td>Country Code</td>
+    <td>${data.countryCode}</td>
+  </tr>
+  <tr>
+    <td>Region</td>
+    <td>${data.region}</td>
+  </tr>
+  <tr>
+    <td>Region Name</td>
+    <td>${data.regionName}</td>
+  </tr>
+  <tr>
+    <td>City</td>
+    <td>${data.city}</td>
+  </tr>
+  <tr>
+    <td>Zip</td>
+    <td>${data.zip}</td>
+  </tr>
+  <tr>
+    <td>Timezone</td>
+    <td>${data.timezone}</td>
+  </tr>
+  <tr>
+    <td>ISP</td>
+    <td>${data.isp}</td>
+  </tr>
+  <tr>
+    <td>Organization</td>
+    <td>${data.org}</td>
+  </tr>
+  <tr>
+    <td>IP</td>
+    <td>${data.query}</td>
+  </tr>
+</table>
+
+    <!-- Bootstrap Buttons -->
+    <a href="/app1" class="btn btn-primary">App1</a>
+    <a href="/app2" class="btn btn-success">App2</a>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   `);
 });
 
