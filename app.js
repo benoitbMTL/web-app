@@ -1,9 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const os = require('os');
 const port = 3000;
-const hostname = os.hostname();  // Add this line
+const hostname = process.env.HOST_MACHINE_NAME || 'Unknown';
 
 // Main homepage
 app.get('/', async (req, res) => {
@@ -17,7 +16,7 @@ app.get('/', async (req, res) => {
       border-collapse: collapse;
     }
     td {
-      padding: 10px;
+      padding: 2px;
     }
     </style>
 

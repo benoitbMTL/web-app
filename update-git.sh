@@ -18,5 +18,5 @@ fi
 # Build and run the Docker container
 echo "Building and starting a new my-web-app container..."
 sudo docker build -t my-web-app .
-sudo docker run --name my-web-app --restart unless-stopped -p 3000:3000 -d my-web-app
+sudo docker run -e HOST_MACHINE_NAME=$(hostname) --name my-web-app --restart unless-stopped -p 3000:3000 -d my-web-app
 
