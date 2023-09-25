@@ -11,11 +11,12 @@ app.get('/', async (req, res) => {
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-      <div class="container"> <!-- Bootstrap container to add space on the left and right -->
-      <h2>Welcome to Fortinet Demo Site</h2>
-
-      <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
-      <div style="height: 20px;"></div>
+      <div class="container mt-4"> <!-- Added top margin (mt-4) -->
+        <div class="d-flex justify-content-between align-items-center"> <!-- Flexbox container -->
+          <h2>Welcome to Fortinet Demo Site</h2> <!-- Title -->
+          <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
+        </div>
+      </div>
 
       <table class="table table-striped"> <!-- Added Bootstrap table classes -->
       <tr>
