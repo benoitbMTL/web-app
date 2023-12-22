@@ -4,20 +4,15 @@
 <head>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <div class="container mt-4">
+    <div class="container mt-4 max-width-container">
         <div class="d-flex justify-content-between align-items-center">
             <h2>Welcome to Fortinet Demo Site</h2>
             <img id="flag" src="" style="width: 10%;">
         </div>
-
-        <div style="height: 20px;"></div>
-
-        <table class="table table-striped" id="data-table">
-            <!-- Table Content will be populated by JavaScript -->
-        </table>
 
         <div style="height: 20px;"></div>
 
@@ -27,7 +22,17 @@
         <a href="/phpinfo" class="btn btn-info">PHP Info</a>
         <a href="/bank" class="btn btn-warning">Bank Application</a>
         <a href="/headers" class="btn btn-info">HTTP Request Headers</a>
-        <br>
+
+        <div style="height: 20px;"></div>
+
+        <table class="table table-striped" id="data-table">
+            <!-- Table Content will be populated by JavaScript -->
+        </table>
+
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2024 Fortinet Demo</p>
+        </footer>
+
     </div>
 
     <!-- Bootstrap JS (optional) -->
