@@ -26,15 +26,14 @@ app.get('/app2', (req, res) => {
 
 // PHP Info page
 app.get('/phpinfo', (req, res) => {
-  exec('php -r "phpinfo();"', (error, stdout, stderr) => {
+  exec('php -r "echo \'<html><body>\'; phpinfo(); echo \'</body></html>\';"', (error, stdout, stderr) => {
     if (error) {
       console.error(`exec error: ${error}`);
       return res.status(500).send('Server Error');
     }
-    res.send(`<pre>${stdout}</pre>`);
+    res.send(stdout);
   });
 });
-
 
 // Bank Application page
 app.get('/bank', (req, res) => {
