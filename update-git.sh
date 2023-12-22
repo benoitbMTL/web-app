@@ -8,7 +8,7 @@ git pull
 chmod 755 *.sh
 
 # Check if container with name my-web-app exists
-if [ $(sudo docker ps -a -f name=my-web-app -q) ]; then
+if [ $(docker ps -a -f name=my-web-app -q) ]; then
   # Stop and remove the container
   echo "Stopping and removing existing my-web-app container..."
   docker stop my-web-app
