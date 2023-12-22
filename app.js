@@ -4,6 +4,9 @@ const app = express();
 const port = 3000;
 const hostname = process.env.HOST_MACHINE_NAME || 'Unknown';
 
+// Serve static files from the "public" directory
+app.use(express.static('public'));
+
 // Main homepage
 app.get('/', async (req, res) => {
   const { data } = await axios.get('http://ip-api.com/json');
@@ -83,6 +86,8 @@ app.get('/', async (req, res) => {
       <!-- Bootstrap Buttons -->
       <a href="/app1" class="btn btn-primary">App1</a>
       <a href="/app2" class="btn btn-success">App2</a>
+      <a href="/phpinfo" class="btn btn-info">PHP Info</a>
+      <a href="/bank" class="btn btn-warning">Bank Application</a>
       </div> <!-- End of Bootstrap container -->
 
       <!-- Bootstrap JS (optional) -->
@@ -127,6 +132,17 @@ app.get('/app2', (req, res) => {
     </body>
   `);
 });
+
+// PHP Info page
+app.get('/phpinfo', (req, res) => {
+  res.send('PHP info page content goes here.');
+});
+
+// Bank Application page
+app.get('/bank', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'bank.html'));
+});
+
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
