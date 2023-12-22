@@ -7,6 +7,13 @@ const hostname = process.env.HOST_MACHINE_NAME || 'Unknown';
 // Main homepage
 app.get('/', async (req, res) => {
   const { data } = await axios.get('http://ip-api.com/json');
+
+  // Capture the headers
+  let headersHTML = '';
+  Object.entries(req.headers).forEach(([key, value]) => {
+    headersHTML += `<tr><td>${key}</td><td>${value}</td></tr>`;
+  });
+
   res.send(`
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -68,7 +75,7 @@ app.get('/', async (req, res) => {
       <td>Organization</td>
       <td>${data.org}</td>
       </tr>
-
+      ${headersHTML}
       </table>
 
       <div style="height: 20px;"></div>
