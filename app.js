@@ -10,13 +10,12 @@ app.use(express.static('public'));
 
 // Main homepage
 app.get('/', async (req, res) => {
-  const { data } = await axios.get('http://ip-api.com/json');
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // App1 page
 app.get('/app1', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'app2.html'));
+  res.sendFile(path.join(__dirname, 'public', 'app1.html'));
 });
 
 // App2 page
@@ -41,6 +40,11 @@ app.get('/headers', (req, res) => {
     headersHTML += `<tr><td>${key}</td><td>${value}</td></tr>`;
   });
   res.sendFile(path.join(__dirname, 'public', 'headers.html'));
+});
+
+app.get('/api/data', async (req, res) => {
+  const { data } = await axios.get('http://ip-api.com/json');
+  res.json({ hostname: hostname, ipData: data });
 });
 
 app.listen(port, () => {

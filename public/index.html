@@ -1,77 +1,99 @@
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container mt-4"> <!-- Added top margin (mt-4) -->
-    <div class="d-flex justify-content-between align-items-center"> <!-- Flexbox container -->
-        <h2>Welcome to Fortinet Demo Site</h2> <!-- Title -->
-        <img src="https://flagpedia.net/data/flags/normal/${data.countryCode.toLowerCase()}.png" style="width: 10%;">
+<head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>Welcome to Fortinet Demo Site</h2>
+            <img id="flag" src="" style="width: 10%;">
+        </div>
+
+        <div style="height: 20px;"></div>
+
+        <table class="table table-striped" id="data-table">
+            <!-- Table Content will be populated by JavaScript -->
+        </table>
+
+        <div style="height: 20px;"></div>
+
+        <!-- Bootstrap Buttons -->
+        <a href="/app1" class="btn btn-primary">App1</a>
+        <a href="/app2" class="btn btn-success">App2</a>
+        <a href="/phpinfo" class="btn btn-info">PHP Info</a>
+        <a href="/bank" class="btn btn-warning">Bank Application</a>
+        <a href="/headers" class="btn btn-info">HTTP Request Headers</a>
+        <br>
     </div>
 
-    <div style="height: 20px;"></div>
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <table class="table table-striped"> <!-- Added Bootstrap table classes -->
-        <tr>
-            <th>Attribute</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td>Hostname</td>
-            <td>${hostname}</td>
-        </tr>
-        <tr>
-            <td>IP</td>
-            <td>${data.query}</td>
-        </tr>
-        <tr>
-            <td>Country</td>
-            <td>${data.country}</td>
-        </tr>
-        <tr>
-            <td>Country Code</td>
-            <td>${data.countryCode}</td>
-        </tr>
-        <tr>
-            <td>Region</td>
-            <td>${data.region}</td>
-        </tr>
-        <tr>
-            <td>Region Name</td>
-            <td>${data.regionName}</td>
-        </tr>
-        <tr>
-            <td>City</td>
-            <td>${data.city}</td>
-        </tr>
-        <tr>
-            <td>Zip</td>
-            <td>${data.zip}</td>
-        </tr>
-        <tr>
-            <td>Timezone</td>
-            <td>${data.timezone}</td>
-        </tr>
-        <tr>
-            <td>ISP</td>
-            <td>${data.isp}</td>
-        </tr>
-        <tr>
-            <td>Organization</td>
-            <td>${data.org}</td>
-        </tr>
-    </table>
+    <script>
+        fetch('/api/data').then(response => response.json()).then(data => {
+            // Update flag image
+            document.getElementById('flag').src = `https://flagpedia.net/data/flags/normal/${data.ipData.countryCode.toLowerCase()}.png`;
 
-    <div style="height: 20px;"></div>
+            // Update table with dynamic data
+            const tableContent = `
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Hostname</td>
+                    <td>${data.hostname}</td>
+                </tr>
+                <tr>
+                    <td>IP</td>
+                    <td>${data.ipData.query}</td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>${data.ipData.country}</td>
+                </tr>
+                <tr>
+                    <td>Country Code</td>
+                    <td>${data.ipData.countryCode}</td>
+                </tr>
+                <tr>
+                    <td>Region</td>
+                    <td>${data.ipData.region}</td>
+                </tr>
+                <tr>
+                    <td>Region Name</td>
+                    <td>${data.ipData.regionName}</td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>${data.ipData.city}</td>
+                </tr>
+                <tr>
+                    <td>Zip</td>
+                    <td>${data.ipData.zip}</td>
+                </tr>
+                <tr>
+                    <td>Timezone</td>
+                    <td>${data.ipData.timezone}</td>
+                </tr>
+                <tr>
+                    <td>ISP</td>
+                    <td>${data.ipData.isp}</td>
+                </tr>
+                <tr>
+                    <td>Organization</td>
+                    <td>${data.ipData.org}</td>
+                </tr>
+            `;
+            document.getElementById('data-table').innerHTML = tableContent;
+        });
+    </script>
+</body>
 
-    <!-- Bootstrap Buttons -->
-    <a href="/app1" class="btn btn-primary">App1</a>
-    <a href="/app2" class="btn btn-success">App2</a>
-    <a href="/phpinfo" class="btn btn-info">PHP Info</a>
-    <a href="/bank" class="btn btn-warning">Bank Application</a>
-    <a href="/headers" class="btn btn-info">HTTP Request Headers</a>
-    <br>
-</div> <!-- End of Bootstrap container -->
-
-<!-- Bootstrap JS (optional) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</html>
