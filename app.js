@@ -78,7 +78,7 @@ app.get('/', async (req, res) => {
       <td>Organization</td>
       <td>${data.org}</td>
       </tr>
-      ${headersHTML}
+      //${headersHTML}
       </table>
 
       <div style="height: 20px;"></div>
@@ -135,7 +135,7 @@ app.get('/app2', (req, res) => {
 
 // PHP Info page
 app.get('/phpinfo', (req, res) => {
-  res.send('PHP info page content goes here.');
+  res.send('<?php phpinfo( ); ?>');
 });
 
 // Bank Application page
