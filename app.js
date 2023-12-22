@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const app = express();
+const exec = require('child_process').exec;
 const port = 3000;
 const hostname = process.env.HOST_MACHINE_NAME || 'Unknown';
 
@@ -25,8 +26,15 @@ app.get('/app2', (req, res) => {
 
 // PHP Info page
 app.get('/phpinfo', (req, res) => {
-  res.send('<?php phpinfo( ); ?>');
+  exec('php -r "phpinfo();"', (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.status(500).send('Server Error');
+    }
+    res.send(`<pre>${stdout}</pre>`);
+  });
 });
+
 
 // Bank Application page
 app.get('/bank', (req, res) => {
