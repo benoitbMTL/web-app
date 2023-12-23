@@ -24,7 +24,7 @@
             ?>
         </table>
 
-        <div style="height: 20px;"></div>
+        <div style="height: 40px;"></div>
 
         <h2>HTTP Response Headers</h2>
         <div style="height: 20px;"></div>
