@@ -1,6 +1,6 @@
 # Simple Dynamic Web App
 
-This repository contains a simple, dynamic web application that serves a home page running on port 3000. When visited, the home page provides:
+This repository contains a simple, dynamic web application that serves a home page running on port 2000. When visited, the home page provides:
 
 - A welcome message
 - A display of the flag corresponding to the location of the server's IP address
@@ -10,7 +10,7 @@ All data is derived in real-time from the IP Geolocation API.
 
 ## How It Works
 
-The application is set up to handle HTTP GET requests to the root URL (http://localhost:3000/). Upon receiving a GET request, the application makes an HTTP GET request to `http://ip-api.com/json`, a third-party IP Geolocation API.
+The application is set up to handle HTTP GET requests to the root URL (http://localhost:2000/). Upon receiving a GET request, the application makes an HTTP GET request to `http://ip-api.com/json`, a third-party IP Geolocation API.
 
 Using the response from this API, the application dynamically constructs an HTML response. This response includes:
 
@@ -29,10 +29,10 @@ docker build -t my-web-app .
 To run the application:
 
 ```bash
-docker run -p 3000:3000 -d my-web-app
+docker run -p 2000:2000 -d my-web-app
 ```
 
-After running these commands, visit `http://localhost:3000` to see the application in action.
+After running these commands, visit `http://localhost:2000` to see the application in action.
 
 ## Example
 

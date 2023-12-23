@@ -7,7 +7,7 @@ WORKDIR /var/www/html
 # Copy the application source code
 COPY . .
 
-# Expose port 3000 for Apache
+# Expose port 80 for Apache
 EXPOSE 80
 
 # Start Apache server in the foreground
