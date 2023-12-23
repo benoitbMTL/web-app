@@ -1,6 +1,3 @@
-# bbuonassera June 5th, 2023
-# web app demo
-# Update Git and Build Docker
 #!/bin/bash
 
 git stash
