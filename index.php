@@ -16,7 +16,7 @@
                 $json_url = "http://ip-api.com/json";
                 $json = file_get_contents($json_url);
                 $data = json_decode($json);
-                $flag_url = "https://flagcdn.com/w320/".$data->countryCode.".png";
+                $flag_url = "https://flagcdn.com/w320/" . strtolower($data->countryCode) . ".png";
             ?>
             <!-- <img id="flag" src="<?php echo $flag_url; ?>" style="width: 10%;"> -->
             <img id="flag" src="<?php echo $flag_url; ?>">
