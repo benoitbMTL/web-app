@@ -24,6 +24,8 @@
             ?>
         </table>
 
+        <div style="height: 20px;"></div>
+
         <h2>HTTP Response Headers</h2>
         <div style="height: 20px;"></div>
         <table class="table table-striped">
