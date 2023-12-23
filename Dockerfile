@@ -1,5 +1,5 @@
 # Start from a PHP image with Apache
-FROM php:7.4-apache
+FROM php:8.2-apache
 
 # Set the working directory to the Apache document root
 WORKDIR /var/www/html
