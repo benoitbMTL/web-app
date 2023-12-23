@@ -18,7 +18,7 @@
                 $data = json_decode($json);
                 $flag_url = "https://flagcdn.com/w320/" . strtolower($data->countryCode) . ".png";
             ?>
-            <img id="flag" src="<?php echo $flag_url; ?>" style="width: 10%;">
+            <img id="flag" src="<?php echo $flag_url; ?>" style="width: 20%;">
         </div>
 
         <div style="height: 20px;"></div>
