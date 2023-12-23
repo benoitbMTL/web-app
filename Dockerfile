@@ -1,24 +1,14 @@
-# Start from the Node.js 14 base image
-FROM node:14
+# Start from a PHP image with Apache
+FROM php:7.4-apache
 
-# Create app directory
-WORKDIR /usr/src/app
+# Set the working directory to the Apache document root
+WORKDIR /var/www/html
 
-# Install app dependencies
-COPY package*.json ./
-RUN npm install
-
-# Bundle app source
+# Copy the application source code
 COPY . .
 
-# Install PHP
-RUN apt-get update && \
-    apt-get install -y php && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# Expose the port the app runs on
+# Expose port 3000 for Apache
 EXPOSE 3000
 
-# Define the command to run the app
-CMD [ "node", "app.js" ]
+# Start Apache server in the foreground
+CMD ["apache2-foreground"]
