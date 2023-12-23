@@ -52,7 +52,7 @@
                 // Construct table content with fetched data
                 const tableContent = `
                     <tr><th>Attribute</th><th>Value</th></tr>
-                    <tr><td>Hostname</td><td>${data.hostname || 'N/A'}</td></tr>
+                    <tr><td>Hostname</td><td><?php echo getenv('HOST_MACHINE_NAME') ?: 'N/A'; ?></td></tr>
                     <tr><td>IP</td><td>${data.query}</td></tr>
                     <tr><td>Country</td><td>${data.country}</td></tr>
                     <tr><td>Country Code</td><td>${data.countryCode}</td></tr>
