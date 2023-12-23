@@ -29,11 +29,6 @@
         <table class="table table-striped">
             <!-- Table Content HTTP Response Headers -->
             <?php
-            // Manually specify response headers
-            header("X-Custom-Header: Fortinet-Demo");
-            header("Content-Type: text/html");
-
-            // Headers to display
             $responseHeaders = headers_list();
             foreach ($responseHeaders as $header) {
                 list($name, $value) = explode(": ", $header, 2);

@@ -27,7 +27,7 @@
         <a href="app2.html" class="btn btn-success mr-1">App2</a>
         <a href="phpinfo.php" class="btn btn-info mr-1">PHP Info</a>
         <a href="bank.html" class="btn btn-warning mr-1">Bank Application</a>
-        <a href="headers.html" class="btn btn-info">HTTP Request Headers</a>
+        <a href="headers.php" class="btn btn-info">HTTP Request Headers</a>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2024 Fortinet Demo</p>
