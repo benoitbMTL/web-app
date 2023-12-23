@@ -34,8 +34,8 @@
             <tr><td>Region Name</td><td><?php echo $data->regionName; ?></td></tr>
             <tr><td>City</td><td><?php echo $data->city; ?></td></tr>
             <tr><td>Zip</td><td><?php echo $data->zip; ?></td></tr>
-            <tr><td>Latitude</td><td><?php echo $data->lat; ?></td></tr>
-            <tr><td>Longitude</td><td><?php echo $data->lon; ?></td></tr>
+            <!-- <tr><td>Latitude</td><td><?php echo $data->lat; ?></td></tr> -->
+            <!-- <tr><td>Longitude</td><td><?php echo $data->lon; ?></td></tr> -->
             <tr><td>Timezone</td><td><?php echo $data->timezone; ?></td></tr>
             <tr><td>ISP</td><td><?php echo $data->isp; ?></td></tr>
             <tr><td>Organization</td><td><?php echo $data->org; ?></td></tr>
