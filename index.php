@@ -16,9 +16,10 @@
                 $json_url = "http://ip-api.com/json";
                 $json = file_get_contents($json_url);
                 $data = json_decode($json);
-                $flag_url = "https://flagpedia.net/data/flags/normal/".$data->countryCode.".png";
+                $flag_url = "https://flagcdn.com/w320/".$data->countryCode.".png";
             ?>
-            <img id="flag" src="<?php echo $flag_url; ?>" style="width: 10%;">
+            <!-- <img id="flag" src="<?php echo $flag_url; ?>" style="width: 10%;"> -->
+            <img id="flag" src="<?php echo $flag_url; ?>">
         </div>
 
         <div style="height: 20px;"></div>
@@ -27,7 +28,7 @@
             <!-- Table Content populated by PHP -->
             <tr><th>Attribute</th><th>Value</th></tr>
             <tr><td>Hostname</td><td><?php echo getenv('HOST_MACHINE_NAME') ?: 'N/A'; ?></td></tr>
-            <tr><td>IP</td><td><?php echo $data->query; ?></td></tr>
+            <tr><td>Public IP</td><td><?php echo $data->query; ?></td></tr>
             <tr><td>Country</td><td><?php echo $data->country; ?></td></tr>
             <tr><td>Country Code</td><td><?php echo $data->countryCode; ?></td></tr>
             <tr><td>Region</td><td><?php echo $data->region; ?></td></tr>
