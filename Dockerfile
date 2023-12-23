@@ -8,7 +8,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Expose port 3000 for Apache
-EXPOSE 3000
+EXPOSE 80
 
 # Start Apache server in the foreground
 CMD ["apache2-foreground"]
