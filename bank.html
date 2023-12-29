@@ -85,6 +85,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+
+
 <script>
 (function () {
     'use strict';
@@ -118,28 +120,25 @@
                 event.stopPropagation();
                 form.classList.add('was-validated');
             } else {
-                // Prepare form data for sending
+                // Simulate POST request
+                console.log('Simulating POST request...');
                 var formData = new FormData(form);
+                for (var [key, value] of formData.entries()) { 
+                    console.log(key, value);
+                }
 
-                // Send data to your backend server
-                fetch('YOUR_BACKEND_ENDPOINT', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json()) // Handle response
-                .then(data => {
-                    console.log('Success:', data);
-                    confirmationMessage.style.display = 'block';
-                    confirmationMessage.textContent = 'Form submitted successfully!';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+                // Show confirmation message
+                confirmationMessage.style.display = 'block';
+                confirmationMessage.textContent = 'Form submitted successfully! (Data not actually sent to a server.)';
             }
         });
     }, false);
 })();
 </script>
+
+
+
+
 </body>
 
 </html>
