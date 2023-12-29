@@ -85,47 +85,40 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-	<script>
-		(function () {
-			'use strict';
-			window.addEventListener('load', function () {
-				var form = document.getElementById('bankForm');
-				var resetButton = document.getElementById('resetButton');
-				var confirmationMessage = document.getElementById('confirmationMessage');
-				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
-				var toggleLabel = document.getElementById('toggleLabel');
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            var form = document.getElementById('bankForm');
+            var validationToggleSwitch = document.getElementById('validationToggleSwitch');
+            var toggleLabel = document.getElementById('toggleLabel');
 
-				validationToggleSwitch.addEventListener('change', function () {
-					if (this.checked) {
-						toggleLabel.textContent = 'Form Validation On';
-						toggleLabel.style.color = 'green';
-						form.classList.add('needs-validation');
-						form.classList.remove('was-validated');
-					} else {
-						toggleLabel.textContent = 'Form Validation Off';
-						toggleLabel.style.color = 'red';
-						form.classList.remove('needs-validation');
-						form.classList.remove('was-validated');
-					}
-				});
+            validationToggleSwitch.addEventListener('change', function () {
+                if (this.checked) {
+                    toggleLabel.textContent = 'Form Validation On';
+                    toggleLabel.style.color = 'green';
+                    form.classList.add('needs-validation');
+                    form.classList.remove('was-validated');
+                } else {
+                    toggleLabel.textContent = 'Form Validation Off';
+                    toggleLabel.style.color = 'red';
+                    form.classList.remove('needs-validation');
+                    form.classList.remove('was-validated');
+                }
+            });
 
-				form.addEventListener('submit', function (event) {
-					event.preventDefault();
-					if (validationToggleSwitch.checked && !form.checkValidity()) {
-						event.stopPropagation();
-						form.classList.add('was-validated');
-					} else {
-						confirmationMessage.style.display = 'block';
-					}
-				});
+            form.addEventListener('submit', function (event) {
+                if (validationToggleSwitch.checked && !form.checkValidity()) {
+                    event.stopPropagation();
+                    form.classList.add('was-validated');
+                } else {
+                    // Form is valid or validation is off, let the form submit
+                }
+            });
 
-				resetButton.addEventListener('click', function () {
-					form.classList.remove('was-validated');
-					confirmationMessage.style.display = 'none';
-				});
-			}, false);
-		})();
-	</script>
+        }, false);
+    })();
+</script>
 </body>
 
 </html>
