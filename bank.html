@@ -28,7 +28,7 @@
 	<!-- Center the form -->
 	<div class="row justify-content-center">
 		<div class="col-md-8 max-width-container">
-			<form id="bankForm" class="needs-validation" novalidate>
+			<form id="bankForm" class="needs-validation" novalidate action="/bank.html" method="post">
 				<div class="row">
 					<div class="col-md-6 mb-3">
 						<label for="firstName">First name</label>
@@ -85,70 +85,47 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+	<script>
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				var form = document.getElementById('bankForm');
+				var resetButton = document.getElementById('resetButton');
+				var confirmationMessage = document.getElementById('confirmationMessage');
+				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
+				var toggleLabel = document.getElementById('toggleLabel');
 
+				validationToggleSwitch.addEventListener('change', function () {
+					if (this.checked) {
+						toggleLabel.textContent = 'Form Validation On';
+						toggleLabel.style.color = 'green';
+						form.classList.add('needs-validation');
+						form.classList.remove('was-validated');
+					} else {
+						toggleLabel.textContent = 'Form Validation Off';
+						toggleLabel.style.color = 'red';
+						form.classList.remove('needs-validation');
+						form.classList.remove('was-validated');
+					}
+				});
 
-<script>
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        var form = document.getElementById('bankForm');
-        var confirmationMessage = document.getElementById('confirmationMessage');
-        var validationToggleSwitch = document.getElementById('validationToggleSwitch');
-        var toggleLabel = document.getElementById('toggleLabel');
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+					if (validationToggleSwitch.checked && !form.checkValidity()) {
+						event.stopPropagation();
+						form.classList.add('was-validated');
+					} else {
+						confirmationMessage.style.display = 'block';
+					}
+				});
 
-        // Toggle form validation on or off
-        validationToggleSwitch.addEventListener('change', function () {
-            if (this.checked) {
-                toggleLabel.textContent = 'Form Validation On';
-                toggleLabel.style.color = 'green';
-                form.classList.add('needs-validation');
-                form.noValidate = false; // Enable HTML5 validation
-            } else {
-                toggleLabel.textContent = 'Form Validation Off';
-                toggleLabel.style.color = 'red';
-                form.classList.remove('needs-validation');
-                form.noValidate = true; // Disable HTML5 validation
-            }
-        });
-
-        // Handle form submission
-        form.addEventListener('submit', function (event) {
-            event.preventDefault();
-
-            // Check form validity if validation is enabled
-            if (validationToggleSwitch.checked && !form.checkValidity()) {
-                event.stopPropagation();
-                form.classList.add('was-validated');
-            } else {
-                // Prepare and send POST request
-                var formData = new FormData(form);
-                fetch('/bank.html', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.text(); // or response.json() if response is in JSON format
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(data => {
-                    console.log('Success:', data);
-                    confirmationMessage.style.display = 'block';
-                    confirmationMessage.textContent = 'Form submitted successfully!';
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        });
-    }, false);
-})();
-</script>
-
-
-
-
+				resetButton.addEventListener('click', function () {
+					form.classList.remove('was-validated');
+					confirmationMessage.style.display = 'none';
+				});
+			}, false);
+		})();
+	</script>
 </body>
 
 </html>
