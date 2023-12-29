@@ -120,16 +120,26 @@
                 event.stopPropagation();
                 form.classList.add('was-validated');
             } else {
-                // Simulate POST request
-                console.log('Simulating POST request...');
+                // Prepare and send POST request
                 var formData = new FormData(form);
-                for (var [key, value] of formData.entries()) { 
-                    console.log(key, value);
-                }
-
-                // Show confirmation message
-                confirmationMessage.style.display = 'block';
-                confirmationMessage.textContent = 'Form submitted successfully! (Data not actually sent to a server.)';
+                fetch('/bank.html', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text(); // or response.json() if response is in JSON format
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    console.log('Success:', data);
+                    confirmationMessage.style.display = 'block';
+                    confirmationMessage.textContent = 'Form submitted successfully!';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
             }
         });
     }, false);
