@@ -32,14 +32,16 @@
 				<div class="row">
 					<div class="col-md-6 mb-3">
 						<label for="firstName">First name</label>
-						<input type="text" class="form-control" id="firstName" name="firstname" placeholder="" value="" required>
+						<input type="text" class="form-control" id="firstName" name="firstname" placeholder="" value=""
+							required>
 						<div class="invalid-feedback">
 							Valid first name is required.
 						</div>
 					</div>
 					<div class="col-md-6 mb-3">
 						<label for="lastName">Last name</label>
-						<input type="text" class="form-control" id="lastName" name="lastname" placeholder="" value="" required>
+						<input type="text" class="form-control" id="lastName" name="lastname" placeholder="" value=""
+							required>
 						<div class="invalid-feedback">
 							Valid last name is required.
 						</div>
@@ -49,7 +51,8 @@
 				<!-- Add email field -->
 				<div class="mb-3">
 					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required>
+					<input type="email" class="form-control" id="email" name="email" placeholder="you@example.com"
+						required>
 					<div class="invalid-feedback">
 						Please enter a valid email address.
 					</div>
@@ -58,8 +61,8 @@
 				<!-- Add phone number field -->
 				<div class="mb-3">
 					<label for="phone">Phone Number</label>
-					<input type="tel" class="form-control" id="phone" name="phone" placeholder="+5141234567" pattern="\+?\d{10,13}"
-						required>
+					<input type="tel" class="form-control" id="phone" name="phone" placeholder="+5141234567"
+						pattern="\+?\d{10,13}" required>
 					<div class="invalid-feedback">
 						Please enter a valid phone number.
 					</div>
@@ -70,7 +73,11 @@
 				<!-- Confirmation message container -->
 				<div id="confirmationMessage" class="alert alert-success mt-3" style="display:none;">
 					Form submitted successfully!
+					<button type="button" id="closeConfirmation" class="close" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
+
 			</form>
 		</div>
 	</div>
@@ -85,59 +92,65 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<script>
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        var form = document.getElementById('bankForm');
-        var confirmationMessage = document.getElementById('confirmationMessage');
-        var validationToggleSwitch = document.getElementById('validationToggleSwitch');
-        var toggleLabel = document.getElementById('toggleLabel');
+	<script>
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				var form = document.getElementById('bankForm');
+				var confirmationMessage = document.getElementById('confirmationMessage');
+				var closeConfirmation = document.getElementById('closeConfirmation'); // Get the new button
+				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
+				var toggleLabel = document.getElementById('toggleLabel');
 
-        validationToggleSwitch.addEventListener('change', function () {
-            if (this.checked) {
-                toggleLabel.textContent = 'Form Validation On';
-                toggleLabel.style.color = 'green';
-                form.classList.add('needs-validation');
-                form.classList.remove('was-validated');
-            } else {
-                toggleLabel.textContent = 'Form Validation Off';
-                toggleLabel.style.color = 'red';
-                form.classList.remove('needs-validation');
-                form.classList.remove('was-validated');
-            }
-        });
+				validationToggleSwitch.addEventListener('change', function () {
+					if (this.checked) {
+						toggleLabel.textContent = 'Form Validation On';
+						toggleLabel.style.color = 'green';
+						form.classList.add('needs-validation');
+						form.classList.remove('was-validated');
+					} else {
+						toggleLabel.textContent = 'Form Validation Off';
+						toggleLabel.style.color = 'red';
+						form.classList.remove('needs-validation');
+						form.classList.remove('was-validated');
+					}
+				});
 
-        form.addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the traditional form submission
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+					if (validationToggleSwitch.checked && !form.checkValidity()) {
+						event.stopPropagation();
+						form.classList.add('was-validated');
+					} else {
+						var formData = new FormData(form);
+						fetch(form.action, {
+							method: 'POST',
+							body: formData
+						})
+							.then(response => {
+								if (response.ok) {
+									// Display confirmation message on successful submission
+									confirmationMessage.style.display = 'block';
+								} else {
+									throw new Error('Network response was not ok.');
+								}
+							})
+							.catch(error => {
+								console.error('Error:', error);
+							});
+					}
+				});
 
-            if (validationToggleSwitch.checked && !form.checkValidity()) {
-                event.stopPropagation();
-                form.classList.add('was-validated');
-            } else {
-                // If form is valid, or validation is turned off, send the form data using fetch
-                var formData = new FormData(form);
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Display confirmation message on successful submission
-                        confirmationMessage.style.display = 'block';
-                        confirmationMessage.textContent = 'Form submitted successfully!';
-                    } else {
-                        throw new Error('Network response was not ok.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            }
-        });
-    }, false);
-})();
-</script>
+				// Add click event listener to the close button
+				closeConfirmation.addEventListener('click', function () {
+					confirmationMessage.style.display = 'none'; // Hide the confirmation message
+				});
+			}, false);
+		})();
+	</script>
+
+
+
 </body>
 
 </html>
