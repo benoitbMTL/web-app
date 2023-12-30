@@ -24,7 +24,7 @@
 	</div>
 
 	<!-- Center the form -->
-	<div class="col-md-8 max-width-container">
+	<div class="col-md-8 max-width-container" id="errorContainer">
 		<form id="bankForm" class="needs-validation" novalidate action="/bank.html" method="post">
 
 			<div class="row">
@@ -178,8 +178,8 @@
 								} else {
 									// Handle non-OK responses (like 4xx, 5xx errors)
 									response.text().then(errorMessage => {
-										// You can process or display the error message here
-										console.error('Server Error:', errorMessage);
+										// Insert the error message into an HTML element
+										document.getElementById('errorContainer').innerHTML = errorMessage;
 									});
 								}
 							})
