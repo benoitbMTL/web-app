@@ -2,11 +2,3 @@
     max-width: 640px;
     margin: auto;
 }
-
-
-#errorContainer {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    display: none; /* Initially hidden, display when there's an error */
-}

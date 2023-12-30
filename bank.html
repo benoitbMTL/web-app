@@ -26,11 +26,9 @@
 
 	<!-- Center the form -->
 	<div class="container">
-		<!-- Center the form and error container in a row -->
 		<div class="row">
 			<div class="col-md-8 offset-md-2">
 				<form id="bankForm" class="needs-validation" novalidate action="/bank.html" method="post">
-
 					<div class="row">
 						<div class="col-md-6 mb-3">
 							<label for="firstName">First name</label>
@@ -122,8 +120,6 @@
 				</form>
 
 
-				<!-- FortiWeb Block Page -->
-				<div id="errorContainer" class="mt-3"></div>
 			</div>
 		</div>
 	</div>
@@ -131,7 +127,7 @@
 	<footer class="my-5 pt-5 text-muted text-center text-small">
 		<p class="mb-1">&copy; 2024 Fortinet Demo</p>
 	</footer>
-	</div>
+
 	<!-- Include Bootstrap JS and dependencies -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -143,7 +139,7 @@
 			window.addEventListener('load', function () {
 				var form = document.getElementById('bankForm');
 				var confirmationMessage = document.getElementById('confirmationMessage');
-				var closeConfirmation = document.getElementById('closeConfirmation'); // Get the new button
+				var closeConfirmation = document.getElementById('closeConfirmation'); // Get the close button
 				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
 				var toggleLabel = document.getElementById('toggleLabel');
 
@@ -179,21 +175,20 @@
 							headers: {
 								'Content-Type': 'application/x-www-form-urlencoded'
 							},
-							body: urlEncodedData
+							body: urlEncodedData,
+							redirect: 'follow' // Ensure redirects are followed
 						})
 							.then(response => {
 								if (response.ok) {
 									confirmationMessage.style.display = 'block';
-								} else {
-									// Handle non-OK responses (like 4xx, 5xx errors)
-									response.text().then(errorMessage => {
-										// Insert the error message into an HTML element
-										document.getElementById('errorContainer').innerHTML = errorMessage;
-									});
+								} else if (!response.redirected) {
+									// For non-redirect, non-OK responses, navigate to a custom error page or handle differently
+									console.error('Error:', response.statusText);
 								}
+								// If the response is a redirect, the browser will automatically follow it
 							})
 							.catch(error => {
-								console.error('Error:', error);
+								console.error('Network Error:', error);
 							});
 					}
 				});
