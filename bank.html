@@ -179,18 +179,25 @@
 							redirect: 'follow' // Ensure redirects are followed
 						})
 							.then(response => {
+								console.log('Response received:', response);
+								console.log('Response status:', response.status);
+
 								if (response.ok) {
+									console.log('Success!');
 									confirmationMessage.style.display = 'block';
 								} else {
-									// Handle non-OK responses
+									console.error('Non-OK response received');
+
 									if (response.status === 500) {
-										// Assuming the 500 error page URL is provided in the response
-										// This is a hypothetical scenario and might need adjustment based on actual server response
+										console.log('Handling 500 error');
 										response.text().then(errorPageHtml => {
+											console.log('Parsing error page HTML');
 											var parser = new DOMParser();
 											var doc = parser.parseFromString(errorPageHtml, 'text/html');
 											var redirectUrl = doc.querySelector('meta[http-equiv="refresh"]').getAttribute('content').split('=')[1];
+
 											if (redirectUrl) {
+												console.log('Redirecting to:', redirectUrl);
 												window.location.href = redirectUrl;
 											} else {
 												console.error('500 Error, but no redirect URL found');
