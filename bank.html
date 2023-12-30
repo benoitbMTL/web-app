@@ -117,6 +117,14 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
+					<div id="errorMessage" class="alert alert-danger mt-3" style="display:none;">
+						Error submitting form!
+						<button type="button" id="closeError" class="close" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+					</div>
+
 				</form>
 
 
@@ -133,71 +141,77 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-<script>
-	(function () {
-		'use strict';
-		window.addEventListener('load', function () {
-			var form = document.getElementById('bankForm');
-			var confirmationMessage = document.getElementById('confirmationMessage');
-			var closeConfirmation = document.getElementById('closeConfirmation');
-			var validationToggleSwitch = document.getElementById('validationToggleSwitch');
-			var toggleLabel = document.getElementById('toggleLabel');
+	<script>
+		(function () {
+			'use strict';
+			window.addEventListener('load', function () {
+				var form = document.getElementById('bankForm');
+				var confirmationMessage = document.getElementById('confirmationMessage');
+				var closeError = document.getElementById('closeError'); 
+				var closeConfirmation = document.getElementById('closeConfirmation');
+				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
+				var toggleLabel = document.getElementById('toggleLabel');
 
-			validationToggleSwitch.addEventListener('change', function () {
-				toggleLabel.textContent = this.checked ? 'Form Validation On' : 'Form Validation Off';
-				toggleLabel.style.color = this.checked ? 'green' : 'red';
-				if (this.checked) {
-					form.classList.add('needs-validation');
-					form.classList.remove('was-validated');
-				} else {
-					form.classList.remove('needs-validation');
-					form.classList.remove('was-validated');
-				}
-			});
-
-			form.addEventListener('submit', function (event) {
-				event.preventDefault();
-				if (!validationToggleSwitch.checked || form.checkValidity()) {
-					var formData = new FormData(form);
-					var urlEncodedData = new URLSearchParams();
-					for (var pair of formData.entries()) {
-						urlEncodedData.append(pair[0], pair[1]);
+				validationToggleSwitch.addEventListener('change', function () {
+					toggleLabel.textContent = this.checked ? 'Form Validation On' : 'Form Validation Off';
+					toggleLabel.style.color = this.checked ? 'green' : 'red';
+					if (this.checked) {
+						form.classList.add('needs-validation');
+						form.classList.remove('was-validated');
+					} else {
+						form.classList.remove('needs-validation');
+						form.classList.remove('was-validated');
 					}
+				});
 
-					fetch(form.action, {
-						method: 'POST',
-						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-						body: urlEncodedData,
-						redirect: 'follow'
-					})
-						.then(response => {
-							if (response.ok) {
-								confirmationMessage.style.display = 'block';
-							} else {
-								console.error('Non-OK response received');
-								return response.text();
-							}
-						})
-						.then(errorPageHtml => {
-							if (errorPageHtml) {
-								console.log('Received error page HTML:', errorPageHtml);
-								// You can handle the error page HTML here as needed
-							}
-						})
-						.catch(error => {
-							console.error('Network Error:', error);
-						});
-				} else {
-					form.classList.add('was-validated');
-				}
-			});
+				form.addEventListener('submit', function (event) {
+					event.preventDefault();
+					if (!validationToggleSwitch.checked || form.checkValidity()) {
+						var formData = new FormData(form);
+						var urlEncodedData = new URLSearchParams();
+						for (var pair of formData.entries()) {
+							urlEncodedData.append(pair[0], pair[1]);
+						}
 
-			closeConfirmation.addEventListener('click', function () {
-				confirmationMessage.style.display = 'none';
-			});
-		}, false);
-	})();
-</script>
+						fetch(form.action, {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+							body: urlEncodedData,
+							redirect: 'follow'
+						})
+							.then(response => {
+								if (response.ok) {
+									confirmationMessage.style.display = 'block';
+									errorMessage.style.display = 'none'; // Hide error message
+								} else if (response.status === 500) {
+									errorMessage.style.display = 'block'; // Show error message
+									confirmationMessage.style.display = 'none'; // Hide success message
+								} else {
+									console.error('Non-OK response received');
+									return response.text();
+								}
+							})
+							.catch(error => {
+								console.error('Network Error:', error);
+								errorMessage.style.display = 'block'; // Show error message on network error
+								confirmationMessage.style.display = 'none'; // Hide success message
+							});
+					} else {
+						form.classList.add('was-validated');
+					}
+				});
+
+				closeConfirmation.addEventListener('click', function () {
+					confirmationMessage.style.display = 'none';
+				});
+
+				closeError.addEventListener('click', function () {
+					errorMessage.style.display = 'none';
+				});
+
+			}, false);
+		})();
+	</script>
 
 </body>
 
