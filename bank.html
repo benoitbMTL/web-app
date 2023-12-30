@@ -181,11 +181,25 @@
 							.then(response => {
 								if (response.ok) {
 									confirmationMessage.style.display = 'block';
-								} else if (!response.redirected) {
-									// For non-redirect, non-OK responses, navigate to a custom error page or handle differently
-									console.error('Error:', response.statusText);
+								} else {
+									// Handle non-OK responses
+									if (response.status === 500) {
+										// Assuming the 500 error page URL is provided in the response
+										// This is a hypothetical scenario and might need adjustment based on actual server response
+										response.text().then(errorPageHtml => {
+											var parser = new DOMParser();
+											var doc = parser.parseFromString(errorPageHtml, 'text/html');
+											var redirectUrl = doc.querySelector('meta[http-equiv="refresh"]').getAttribute('content').split('=')[1];
+											if (redirectUrl) {
+												window.location.href = redirectUrl;
+											} else {
+												console.error('500 Error, but no redirect URL found');
+											}
+										});
+									} else {
+										console.error('Error:', response.statusText);
+									}
 								}
-								// If the response is a redirect, the browser will automatically follow it
 							})
 							.catch(error => {
 								console.error('Network Error:', error);
