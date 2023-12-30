@@ -175,14 +175,12 @@
 							.then(response => {
 								if (response.ok) {
 									confirmationMessage.style.display = 'block';
-								} else if (response.status === 500) {
-									// Handle 500 Internal Server Error
-									response.text().then(errorMessage => {
-										// Display the error message or WAF page content
-										document.getElementById('errorContainer').innerHTML = errorMessage;
-									});
 								} else {
-									throw new Error('Network response was not ok.');
+									// Handle non-OK responses (like 4xx, 5xx errors)
+									response.text().then(errorMessage => {
+										// You can process or display the error message here
+										console.error('Server Error:', errorMessage);
+									});
 								}
 							})
 							.catch(error => {
