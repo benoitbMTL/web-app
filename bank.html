@@ -133,94 +133,71 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-	<script>
-		(function () {
-			'use strict';
-			window.addEventListener('load', function () {
-				var form = document.getElementById('bankForm');
-				var confirmationMessage = document.getElementById('confirmationMessage');
-				var closeConfirmation = document.getElementById('closeConfirmation'); // Get the close button
-				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
-				var toggleLabel = document.getElementById('toggleLabel');
+<script>
+	(function () {
+		'use strict';
+		window.addEventListener('load', function () {
+			var form = document.getElementById('bankForm');
+			var confirmationMessage = document.getElementById('confirmationMessage');
+			var closeConfirmation = document.getElementById('closeConfirmation');
+			var validationToggleSwitch = document.getElementById('validationToggleSwitch');
+			var toggleLabel = document.getElementById('toggleLabel');
 
-				validationToggleSwitch.addEventListener('change', function () {
-					if (this.checked) {
-						toggleLabel.textContent = 'Form Validation On';
-						toggleLabel.style.color = 'green';
-						form.classList.add('needs-validation');
-						form.classList.remove('was-validated');
-					} else {
-						toggleLabel.textContent = 'Form Validation Off';
-						toggleLabel.style.color = 'red';
-						form.classList.remove('needs-validation');
-						form.classList.remove('was-validated');
+			validationToggleSwitch.addEventListener('change', function () {
+				toggleLabel.textContent = this.checked ? 'Form Validation On' : 'Form Validation Off';
+				toggleLabel.style.color = this.checked ? 'green' : 'red';
+				if (this.checked) {
+					form.classList.add('needs-validation');
+					form.classList.remove('was-validated');
+				} else {
+					form.classList.remove('needs-validation');
+					form.classList.remove('was-validated');
+				}
+			});
+
+			form.addEventListener('submit', function (event) {
+				event.preventDefault();
+				if (!validationToggleSwitch.checked || form.checkValidity()) {
+					var formData = new FormData(form);
+					var urlEncodedData = new URLSearchParams();
+					for (var pair of formData.entries()) {
+						urlEncodedData.append(pair[0], pair[1]);
 					}
-				});
 
-				form.addEventListener('submit', function (event) {
-					event.preventDefault();
-					if (validationToggleSwitch.checked && !form.checkValidity()) {
-						event.stopPropagation();
-						form.classList.add('was-validated');
-					} else {
-						var formData = new FormData(form);
-						var urlEncodedData = new URLSearchParams();
-
-						for (var pair of formData.entries()) {
-							urlEncodedData.append(pair[0], pair[1]);
-						}
-
-						fetch(form.action, {
-							method: 'POST',
-							headers: {
-								'Content-Type': 'application/x-www-form-urlencoded'
-							},
-							body: urlEncodedData,
-							redirect: 'follow' // Ensure redirects are followed
+					fetch(form.action, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: urlEncodedData,
+						redirect: 'follow'
+					})
+						.then(response => {
+							if (response.ok) {
+								confirmationMessage.style.display = 'block';
+							} else {
+								console.error('Non-OK response received');
+								return response.text();
+							}
 						})
-							.then(response => {
-								console.log('Response received:', response);
-								console.log('Response status:', response.status);
+						.then(errorPageHtml => {
+							if (errorPageHtml) {
+								console.log('Received error page HTML:', errorPageHtml);
+								// You can handle the error page HTML here as needed
+							}
+						})
+						.catch(error => {
+							console.error('Network Error:', error);
+						});
+				} else {
+					form.classList.add('was-validated');
+				}
+			});
 
-								if (response.ok) {
-									console.log('Success!');
-									confirmationMessage.style.display = 'block';
-								} else {
-									console.error('Non-OK response received');
-
-									if (response.status === 500) {
-										console.log('Handling 500 error');
-										response.text().then(errorPageHtml => {
-											console.log('Parsing error page HTML');
-											var parser = new DOMParser();
-											var doc = parser.parseFromString(errorPageHtml, 'text/html');
-											var redirectUrl = doc.querySelector('meta[http-equiv="refresh"]').getAttribute('content').split('=')[1];
-
-											if (redirectUrl) {
-												console.log('Redirecting to:', redirectUrl);
-												window.location.href = redirectUrl;
-											} else {
-												console.error('500 Error, but no redirect URL found');
-											}
-										});
-									} else {
-										console.error('Error:', response.statusText);
-									}
-								}
-							})
-							.catch(error => {
-								console.error('Network Error:', error);
-							});
-					}
-				});
-
-				// Add click event listener to the close button
-				closeConfirmation.addEventListener('click', function () {
-					confirmationMessage.style.display = 'none'; // Hide the confirmation message
-				});
-			}, false);
-		})();
-	</script>
+			closeConfirmation.addEventListener('click', function () {
+				confirmationMessage.style.display = 'none';
+			});
+		}, false);
+	})();
+</script>
 
 </body>
 
