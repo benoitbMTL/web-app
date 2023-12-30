@@ -147,7 +147,7 @@
 			window.addEventListener('load', function () {
 				var form = document.getElementById('bankForm');
 				var confirmationMessage = document.getElementById('confirmationMessage');
-				var closeError = document.getElementById('closeError'); 
+				var closeError = document.getElementById('closeError');
 				var closeConfirmation = document.getElementById('closeConfirmation');
 				var validationToggleSwitch = document.getElementById('validationToggleSwitch');
 				var toggleLabel = document.getElementById('toggleLabel');
@@ -182,10 +182,13 @@
 							.then(response => {
 								if (response.ok) {
 									confirmationMessage.style.display = 'block';
-									errorMessage.style.display = 'none'; 
-								} else if (response.status === 400) {
-									errorMessage.style.display = 'block'; 
-									confirmationMessage.style.display = 'none'; 
+									errorMessage.style.display = 'none';
+								} else if (response.status === 500) {
+									errorMessage.style.display = 'block';
+									confirmationMessage.style.display = 'none';
+									response.text().then(text => {
+										console.log('500 Error Response:', text);
+									});
 								} else {
 									console.error('Non-OK response received');
 									return response.text();
@@ -193,8 +196,8 @@
 							})
 							.catch(error => {
 								console.error('Network Error:', error);
-								errorMessage.style.display = 'block'; 
-								confirmationMessage.style.display = 'none'; 
+								errorMessage.style.display = 'block';
+								confirmationMessage.style.display = 'none';
 							});
 					} else {
 						form.classList.add('was-validated');
