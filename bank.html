@@ -182,10 +182,10 @@
 							.then(response => {
 								if (response.ok) {
 									confirmationMessage.style.display = 'block';
-									errorMessage.style.display = 'none'; // Hide error message
-								} else if (response.status === 500) {
-									errorMessage.style.display = 'block'; // Show error message
-									confirmationMessage.style.display = 'none'; // Hide success message
+									errorMessage.style.display = 'none'; 
+								} else if (response.status === 400) {
+									errorMessage.style.display = 'block'; 
+									confirmationMessage.style.display = 'none'; 
 								} else {
 									console.error('Non-OK response received');
 									return response.text();
@@ -193,8 +193,8 @@
 							})
 							.catch(error => {
 								console.error('Network Error:', error);
-								errorMessage.style.display = 'block'; // Show error message on network error
-								confirmationMessage.style.display = 'none'; // Hide success message
+								errorMessage.style.display = 'block'; 
+								confirmationMessage.style.display = 'none'; 
 							});
 					} else {
 						form.classList.add('was-validated');
