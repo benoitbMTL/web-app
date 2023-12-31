@@ -107,27 +107,34 @@
 						</div>
 					</div>
 
+					<!-- Line -->
 					<hr class="mb-4">
-					<button class="btn btn-primary btn-sm btn-block" type="submit">Submit</button>
-					<!-- Confirmation message container -->
-					<div id="confirmationMessage" class="alert alert-success mt-3"
-						style="display:none; align-items: center; justify-content: space-between;">
-						Form submitted successfully!
-						<button type="button" id="closeConfirmation" class="close btn-sm" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div id="errorMessage" class="alert alert-danger mt-3" style="display:none;">
-						Error submitting form!
-						<button type="button" id="closeError" class="close btn-sm" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+
+					<div class="row">
+
+						<div class="col-md-6 mb-3">
+							<!-- Confirmation message container -->
+							<div id="confirmationMessage" class="alert alert-success" role="alert" style="display:none;">
+								Form submitted successfully!
+								<button type="button" id="closeConfirmation" class="close" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div id="errorMessage" class="alert alert-danger" style="display:none;">
+								Error submitting form!
+								<button type="button" id="closeError" class="close" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+						</div>
+						<!-- Submit Button -->
+						<div class="col-md-6 mb-3">
+							<button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+						</div>
 
 					</div>
 
 				</form>
-
-
 			</div>
 		</div>
 	</div>
