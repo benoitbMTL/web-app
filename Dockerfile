@@ -19,8 +19,15 @@ COPY main/ /var/www/html/
 WORKDIR /var/www/html
 
 # Set up Node.js project in a separate directory
-COPY public/ /var/www/nodeapp/
+# Adjust the COPY path to include the 'server/' prefix
+COPY server/public/ /var/www/nodeapp/public/
+COPY server/server.js /var/www/nodeapp/
+COPY server/package.json /var/www/nodeapp/
+
+# Go to the Node.js app directory
 WORKDIR /var/www/nodeapp
+
+# Install Node.js dependencies
 RUN npm install
 
 # Configure Apache to serve the PHP files from the root and proxy requests to Node.js
