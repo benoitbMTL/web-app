@@ -19,7 +19,7 @@ COPY main/ /var/www/html/
 WORKDIR /var/www/html
 
 # Set up Node.js project in a separate directory
-COPY upload/ /var/www/nodeapp/
+COPY public/ /var/www/nodeapp/
 WORKDIR /var/www/nodeapp
 RUN npm install
 
