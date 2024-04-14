@@ -8,7 +8,7 @@ const app = express();
 app.use(fileUpload());
 
 // Serve static files from a 'public' directory now
-app.use("/public", express.static(path.join(__dirname, "public")));
+app.use('/upload', express.static(path.join(__dirname, 'server', 'public')));
 
 app.post("/api/upload", (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
