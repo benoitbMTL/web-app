@@ -16,4 +16,3 @@ fi
 echo "Building and starting a new my-web-app container..."
 docker build -t my-web-app .
 docker run -e HOST_MACHINE_NAME=$(hostname) --name my-web-app --restart unless-stopped -p 2000:80 -d my-web-app
-
