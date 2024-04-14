@@ -7,7 +7,7 @@ const app = express();
 
 app.use(fileUpload());
 app.use(express.static("public"));
-app.use("/upload", express.static("upload"));
+app.use("/upload", express.static(path.join(__dirname, "upload")));
 
 app.post("/upload", (req, res) => {
   if (!req.files) {

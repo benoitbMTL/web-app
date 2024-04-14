@@ -11,6 +11,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install
 # Enable Apache modules for proxy functionality
 RUN a2enmod proxy proxy_http rewrite
 
+# Set DirectoryIndex to prefer index.php over other index files
+RUN sed -i 's/DirectoryIndex.*$/DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm/' /etc/apache2/mods-enabled/dir.conf
+
 # Copy your PHP project files to the Apache document root
 COPY main/ /var/www/html/
 WORKDIR /var/www/html
