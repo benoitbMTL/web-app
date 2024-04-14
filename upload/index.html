@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Upload</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        .spinner-border {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: text-bottom;
+            border: 0.25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border 0.75s linear infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+
+        <!-- Line 1: Title on the left, buttons on the right -->
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" class="mb-5">
+            <div class="row justify-content-between mb-2">
+                <div class="col-auto">
+                    <h2>File Upload</h2>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" form="uploadForm" class="btn btn-primary">
+                        Upload File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Line 2: File choose form -->
+            <div class="custom-file mb-3">
+                <input type="file" name="file" class="custom-file-input" id="customFile" />
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+        </form>
+
+        <!-- Line 3: Uploaded Files title with Delete All Files button on the right -->
+        <div class="row justify-content-between mb-2">
+            <div class="col-auto">
+                <h2>File Directory Listing</h2>
+            </div>
+            <div class="col-auto">
+                <button id="deleteAllButton" class="btn btn-danger mr-2">
+                    Delete Files
+                </button>
+                <button id="hardReloadButton" class="btn btn-secondary">Reset Messages</button>
+
+            </div>
+        </div>
+
+
+        <!-- Line 4: Iframe -->
+        <div class="mb-3">
+            <iframe id="uploadFrame" src="/upload" style="width:100%; height:250px;"
+                class="border rounded pt-2"></iframe>
+        </div>
+
+
+        <!-- Line 5: Alerts -->
+        <div id="uploadSuccess" class="alert alert-success alert-dismissible fade show mb-3" style="display: none">
+            <strong>Success!</strong> File Uploaded Successfully:
+            <span id="fileName"></span><br />
+            Upload Duration: <span id="uploadDuration"></span> seconds<br />
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div id="deleteSuccess" class="alert alert-danger alert-dismissible fade show mb-3" style="display: none">
+            <strong>Done!</strong> All files have been deleted successfully.<br />
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div id="uploadBlocked" class="alert alert-warning alert-dismissible fade show mb-3" style="display: none">
+            <strong>Upload Failed:</strong> FortiWeb has detected a potential
+            security risk with your file and has stopped the upload process.<br />
+            Upload Duration: <span id="uploadBlockedDuration"></span> seconds<br />
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        // Function to hide all messages
+        function hideAllMessages() {
+            console.log("Hiding all messages.");
+            document.getElementById("uploadSuccess").style.display = "none";
+            document.getElementById("deleteSuccess").style.display = "none";
+            document.getElementById("uploadBlocked").style.display = "none";
+        }
+
+
+
+        document.getElementById("uploadForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            console.log("Upload form submitted.");
+            hideAllMessages(); // Hide messages on form submit
+
+            var uploadButton = document.querySelector('#uploadForm button[type="submit"]');
+            uploadButton.innerHTML = 'Uploading... <span class="spinner-border"></span>';
+            uploadButton.disabled = true;
+
+            var startTime = new Date();
+            console.log("Upload started at:", startTime);
+
+            var formData = new FormData(this);
+            fetch("/upload", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    console.log("Upload response received. Status:", response.status);
+                    if (response.ok) {
+                        return response.json();
+                    } else if (response.status === 500) {
+                        throw new Error("Upload blocked by FortiWeb");
+                    } else {
+                        throw new Error(
+                            "Network response was not ok: " + response.statusText
+                        );
+                    }
+                })
+                .then((data) => {
+                    console.log("Upload success. Data:", data);
+                    var endTime = new Date();
+                    var uploadDuration = (endTime - startTime) / 1000;
+                    document.getElementById("uploadSuccess").style.display = "block";
+                    document.getElementById("fileName").textContent = data.fileName;
+                    document.getElementById("uploadDuration").textContent =
+                        uploadDuration.toFixed(2);
+                    uploadButton.innerHTML = "Upload File";
+                    uploadButton.disabled = false;
+                    document.getElementById('uploadFrame').src += ''; // Refresh the iframe
+
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                    var endTime = new Date();
+                    var uploadDuration = (endTime - startTime) / 1000;
+                    if (error.message === "Upload blocked by FortiWeb") {
+                        document.getElementById("uploadBlocked").style.display = "block";
+                        document.getElementById("uploadBlockedDuration").textContent = uploadDuration.toFixed(2);
+                    }
+                    uploadButton.innerHTML = "Upload File";
+                    uploadButton.disabled = false;
+                });
+
+        });
+
+        $(".custom-file-input").on("change", function () {
+            console.log("File selected:", $(this).val());
+            hideAllMessages();
+
+            // Get the selected file's name
+            var fileName = $(this).val().split("\\").pop(); // This will extract the file name from the path
+
+            // Set the file name on the label
+            $(this)
+                .siblings(".custom-file-label")
+                .addClass("selected")
+                .html(fileName);
+        });
+
+        document
+            .getElementById("deleteAllButton")
+            .addEventListener("click", function () {
+                console.log("Delete all button clicked.");
+                hideAllMessages();
+
+                fetch("/delete-all", { method: "POST" })
+                    .then((response) => {
+                        console.log("Delete response received. Status:", response.status);
+                        return response.json();
+                    })
+                    .then((data) => {
+                        console.log("Delete operation success. Data:", data);
+                        document.getElementById("deleteSuccess").style.display = "block";
+                        document.getElementById("uploadFrame").contentWindow.location.reload(true);
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                    });
+            });
+
+
+        document
+            .getElementById("hardReloadButton")
+            .addEventListener("click", function () {
+                window.location.reload(true); // The 'true' parameter attempts to force a reload without cache.
+            });
+    </script>
+
+</body>
+
+</html>
