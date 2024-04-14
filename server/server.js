@@ -7,8 +7,8 @@ const app = express();
 
 app.use(fileUpload());
 
-// Serve static files from a 'public' directory now
-app.use('/upload', express.static(path.join(__dirname, 'server', 'public')));
+// Correct the path to serve static files correctly
+app.use('/upload', express.static(path.join(__dirname, 'public')));
 
 app.post("/api/upload", (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -30,9 +30,22 @@ app.get("/api/files", async (req, res) => {
     const files = await util.promisify(fs.readdir)(directoryPath);
     const fileInfos = files.map(file => {
       const stats = fs.statSync(path.join(directoryPath, file));
-      return `<li><a href="/public/${file}">${file}</a> (${(stats.size / 1024).toFixed(2)} KB)</li>`;
+      return `<li><a href="/upload/${file}">${file}</a> (${(stats.size / 1024).toFixed(2)} KB)</li>`;
     });
-    res.send(`<html>...</html>`); // Complete HTML response for brevity
+    res.send(`
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Uploaded Files</title>
+                <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+            </head>
+            <body>
+                    <ul>${fileInfos.join("")}</ul>
+            </body>
+            </html>
+        `);
   } catch (err) {
     res.status(500).send("Unable to scan directory: " + err);
   }

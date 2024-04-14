@@ -50,7 +50,7 @@
         <a href="phpinfo.php" class="btn btn-info mr-1">PHP Info</a>
         <a href="headers.php" class="btn btn-info">HTTP Headers</a>
         <a href="bank.html" class="btn btn-warning mr-1">Bank</a>
-        <a href="upload.html" class="btn btn-warning mr-1">File Upload</a>
+        <a href="/upload/index.html" class="btn btn-warning mr-1">File Upload</a>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2024 Fortinet Demo</p>
