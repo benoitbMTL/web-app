@@ -1,31 +1,19 @@
 # Start from a base image with Ubuntu
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # Avoid prompts from apt
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install Apache, PHP, Node.js, and necessary utilities
-RUN apt-get update && apt-get install -y \
-    apache2 \
-    php \
-    libapache2-mod-php \
-    php-cli \
-    curl \
-    vim
+RUN apt-get update && apt-get install -y apache2 php libapache2-mod-php php-cli curl vim
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
 
 # Enable Apache modules for proxy functionality
 RUN a2enmod proxy proxy_http rewrite
 
-# Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs
-
 # Copy your PHP project files to the Apache document root
-COPY . /var/www/html/
+COPY main/ /var/www/html/
 WORKDIR /var/www/html
-
-# Exclude the upload directory from being copied to Apache document root
-RUN rm -rf /var/www/html/upload
 
 # Set up Node.js project in a separate directory
 COPY upload/ /var/www/nodeapp/
