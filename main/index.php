@@ -8,23 +8,24 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="app1.html" class="btn btn-primary mr-1 nav-link">App1</a></li>
-                    <li class="nav-item"><a href="app2.html" class="btn btn-success mr-1 nav-link">App2</a></li>
-                    <li class="nav-item"><a href="phpinfo.php" class="btn btn-info mr-1 nav-link">PHP Info</a></li>
-                    <li class="nav-item"><a href="headers.php" class="btn btn-info nav-link">HTTP Headers</a></li>
-                    <li class="nav-item"><a href="bank.html" class="btn btn-warning mr-1 nav-link">Bank</a></li>
-                    <li class="nav-item"><a href="upload.php" class="btn btn-warning mr-1 nav-link">File Upload</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="app1.html" class="btn btn-primary mx-3 nav-link">App1</a></li>
+                <li class="nav-item"><a href="app2.html" class="btn btn-success mx-3 nav-link">App2</a></li>
+                <li class="nav-item"><a href="phpinfo.php" class="btn btn-info mx-3 nav-link">PHP Info</a></li>
+                <li class="nav-item"><a href="headers.php" class="btn btn-info mx-3 nav-link">HTTP Headers</a></li>
+                <li class="nav-item"><a href="bank.html" class="btn btn-warning mx-3 nav-link">Bank</a></li>
+                <li class="nav-item"><a href="upload.php" class="btn btn-warning mx-3 nav-link">File Upload</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
+
 
     <div class="container mt-4 max-width-container" style="padding-top: 75px;">
         <div class="d-flex justify-content-between align-items-center">
