@@ -88,7 +88,7 @@ function listUploads($dir) {
         <h2>File Upload Form</h2>
         <form action="upload.php" method="post" enctype="multipart/form-data" class="mb-3">
             <div class="mb-3">
-                <label for="fileToUpload" class="form-label">Select file to upload:</label>
+                <!-- <label for="fileToUpload" class="form-label">Select file to upload:</label>  -->
                 <input type="file" class="form-control" name="fileToUpload" id="fileToUpload">
             </div>
             <button type="submit" class="btn btn-primary btn-sm">Upload File</button>
