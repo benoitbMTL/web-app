@@ -13,7 +13,7 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a href="app1.html" class="btn btn-primary mr-1 nav-link">App1</a></li>
                     <li class="nav-item"><a href="app2.html" class="btn btn-success mr-1 nav-link">App2</a></li>
@@ -28,7 +28,7 @@
 
     <div class="container mt-4 max-width-container" style="padding-top: 75px;">
         <div class="d-flex justify-content-between align-items-center">
-            <h3>Welcome to Fortinet Demo App</h3>
+            <h3>Welcome to the Fortinet Demo App</h3>
             <!-- PHP will update the flag image -->
             <?php
                 $json_url = "http://ip-api.com/json";
