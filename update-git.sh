@@ -19,3 +19,6 @@ fi
 echo "Building and starting a new $CONTAINER_NAME container..."
 docker build -t $CONTAINER_NAME .
 docker run -e HOST_MACHINE_NAME=$(hostname) --name $CONTAINER_NAME --restart unless-stopped -p 2000:80 -d $CONTAINER_NAME
+
+# docker tag demo-web-app:latest benoitbmtl/demo-web-app:latest
+# docker push benoitbmtl/demo-web-app:latest

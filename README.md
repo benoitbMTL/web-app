@@ -26,7 +26,7 @@ To build and run the Docker image from the Dockerfile provided, navigate to the 
 git clone https://github.com/benoitbMTL/web-app.git
 cd web-app
 docker build -t demo-web-app .
-docker run -d --restart unless-stopped --name demo-web-app -p 2000:80     -e HOST_MACHINE_NAME=$(hostname) benoitbmtl/demo-web-app
+docker run -d --restart unless-stopped --name demo-web-app -p 2000:80 -e HOST_MACHINE_NAME=$(hostname) benoitbmtl/demo-web-app
 ```
 
 After running these commands, visit `http://localhost:2000` to see the application in action.
