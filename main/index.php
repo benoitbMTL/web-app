@@ -3,7 +3,7 @@
 
 <head>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
@@ -44,23 +44,21 @@
 
         <div style="height: 20px;"></div>
 
-        <!-- Bootstrap Buttons -->
+        <!-- Bootstrap Buttons -->        
+        <div class="d-flex justify-content-center">
         <a href="app1.html" class="btn btn-primary mr-1">App1</a>
         <a href="app2.html" class="btn btn-success mr-1">App2</a>
         <a href="phpinfo.php" class="btn btn-info mr-1">PHP Info</a>
         <a href="headers.php" class="btn btn-info">HTTP Headers</a>
         <a href="bank.html" class="btn btn-warning mr-1">Bank</a>
-        <a href="/file" class="btn btn-warning mr-1">File Upload</a>
+        <a href="update.php" class="btn btn-warning mr-1">File Upload</a>
+        </div>
 
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2024 Fortinet Demo</p>
         </footer>
     </div>
 
-    <!-- Bootstrap JS (optional) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
