@@ -8,9 +8,27 @@
 </head>
 
 <body>
-    <div class="container mt-4 max-width-container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="app1.html" class="btn btn-primary mr-1 nav-link">App1</a></li>
+                    <li class="nav-item"><a href="app2.html" class="btn btn-success mr-1 nav-link">App2</a></li>
+                    <li class="nav-item"><a href="phpinfo.php" class="btn btn-info mr-1 nav-link">PHP Info</a></li>
+                    <li class="nav-item"><a href="headers.php" class="btn btn-info nav-link">HTTP Headers</a></li>
+                    <li class="nav-item"><a href="bank.html" class="btn btn-warning mr-1 nav-link">Bank</a></li>
+                    <li class="nav-item"><a href="upload.php" class="btn btn-warning mr-1 nav-link">File Upload</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4 max-width-container" style="padding-top: 75px;">
         <div class="d-flex justify-content-between align-items-center">
-            <h2>Welcome to Fortinet Demo Site</h2>
+            <h3>Welcome to Fortinet Demo App</h3>
             <!-- PHP will update the flag image -->
             <?php
                 $json_url = "http://ip-api.com/json";
@@ -34,31 +52,19 @@
             <tr><td>Region Name</td><td><?php echo $data->regionName; ?></td></tr>
             <tr><td>City</td><td><?php echo $data->city; ?></td></tr>
             <tr><td>Zip</td><td><?php echo $data->zip; ?></td></tr>
-            <!-- <tr><td>Latitude</td><td><?php echo $data->lat; ?></td></tr> -->
-            <!-- <tr><td>Longitude</td><td><?php echo $data->lon; ?></td></tr> -->
             <tr><td>Timezone</td><td><?php echo $data->timezone; ?></td></tr>
             <tr><td>ISP</td><td><?php echo $data->isp; ?></td></tr>
             <tr><td>Organization</td><td><?php echo $data->org; ?></td></tr>
             <tr><td>AS</td><td><?php echo $data->as; ?></td></tr>
         </table>
 
-        <div style="height: 20px;"></div>
-
-        <!-- Bootstrap Buttons -->        
-        <div class="d-flex justify-content-center">
-        <a href="app1.html" class="btn btn-primary mr-1">App1</a>
-        <a href="app2.html" class="btn btn-success mr-1">App2</a>
-        <a href="phpinfo.php" class="btn btn-info mr-1">PHP Info</a>
-        <a href="headers.php" class="btn btn-info">HTTP Headers</a>
-        <a href="bank.html" class="btn btn-warning mr-1">Bank</a>
-        <a href="update.php" class="btn btn-warning mr-1">File Upload</a>
-        </div>
-
         <footer class="my-5 pt-5 text-muted text-center text-small">
             <p class="mb-1">&copy; 2024 Fortinet Demo</p>
         </footer>
     </div>
 
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
