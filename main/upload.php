@@ -84,8 +84,8 @@ function listUploads($dir) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-<div class="container mt-4 max-width-container" style="padding-top: 75px;">
-        <h3>File Upload Form</h3>
+<div class="container mt-4 max-width-container">
+        <h2>File Upload Form</h2>
         <form action="upload.php" method="post" enctype="multipart/form-data" class="mb-3">
             <div class="mb-3">
                 <label for="fileToUpload" class="form-label">Select file to upload:</label>
