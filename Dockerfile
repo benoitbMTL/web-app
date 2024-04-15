@@ -5,7 +5,7 @@ FROM php:8.2-apache
 WORKDIR /var/www/html
 
 # Copy the application source code
-COPY . .
+COPY main/ .
 
 # Expose port 80 for Apache
 EXPOSE 80
