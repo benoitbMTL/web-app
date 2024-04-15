@@ -31,8 +31,8 @@ WORKDIR /var/www/nodeapp
 RUN npm install
 
 # Configure Apache to serve the PHP files from the root and proxy requests to Node.js
-RUN echo 'ProxyPass /upload http://localhost:9000/upload' >> /etc/apache2/sites-available/000-default.conf
-RUN echo 'ProxyPassReverse /upload http://localhost:9000/upload' >> /etc/apache2/sites-available/000-default.conf
+RUN echo 'ProxyPass /file http://localhost:9000/file' >> /etc/apache2/sites-available/000-default.conf
+RUN echo 'ProxyPassReverse /file http://localhost:9000/file' >> /etc/apache2/sites-available/000-default.conf
 
 # Set working directory back to document root
 WORKDIR /var/www/html

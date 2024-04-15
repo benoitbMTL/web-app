@@ -8,9 +8,9 @@ const app = express();
 app.use(fileUpload());
 
 // Correct the path to serve static files correctly
-app.use('/upload', express.static(path.join(__dirname, 'public')));
+app.use('/file/upload', express.static(path.join(__dirname, 'public')));
 
-app.post("/api/upload", (req, res) => {
+app.post("/file/api/upload", (req, res) => {
   if (!req.files || Object.keys(req.files).length === 0) {
     return res.status(400).send("No files were uploaded.");
   }
@@ -30,7 +30,7 @@ app.get("/api/files", async (req, res) => {
     const files = await util.promisify(fs.readdir)(directoryPath);
     const fileInfos = files.map(file => {
       const stats = fs.statSync(path.join(directoryPath, file));
-      return `<li><a href="/upload/${file}">${file}</a> (${(stats.size / 1024).toFixed(2)} KB)</li>`;
+      return `<li><a href="/file/upload/${file}">${file}</a> (${(stats.size / 1024).toFixed(2)} KB)</li>`;
     });
     res.send(`
             <!DOCTYPE html>
