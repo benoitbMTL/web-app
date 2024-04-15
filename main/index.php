@@ -14,7 +14,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li class="nav-item"><a href="app1.html" class="btn btn-primary mr-1 nav-link">App1</a></li>
                     <li class="nav-item"><a href="app2.html" class="btn btn-success mr-1 nav-link">App2</a></li>
                     <li class="nav-item"><a href="phpinfo.php" class="btn btn-info mr-1 nav-link">PHP Info</a></li>
